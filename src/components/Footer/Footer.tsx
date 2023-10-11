@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import blueLogo from '../../../public/images/logo-blue.svg';
 
 const navigation = {
@@ -97,7 +98,7 @@ const Footer = () => {
               </p>
               <div className="flex space-x-6">
                 {navigation.social.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
                     href={item.href}
                     className="text-gray-400 hover:text-gray-500"
@@ -107,7 +108,7 @@ const Footer = () => {
                       className="h-6 w-6"
                       aria-hidden="true"
                     />
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -123,12 +124,12 @@ const Footer = () => {
               >
                 {navigation.support.map((item) => (
                   <li key={item.name}>
-                    <a
+                    <Link
                       href={item.href}
                       className="text-sm leading-6 text-gray-600 hover:text-gray-900"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -143,12 +144,12 @@ const Footer = () => {
               >
                 {navigation.company.map((item) => (
                   <li key={item.name}>
-                    <a
+                    <Link
                       href={item.href}
                       className="text-sm leading-6 text-gray-600 hover:text-gray-900"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -163,12 +164,12 @@ const Footer = () => {
               >
                 {navigation.legal.map((item) => (
                   <li key={item.name}>
-                    <a
+                    <Link
                       href={item.href}
                       className="text-sm leading-6 text-gray-600 hover:text-gray-900"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
