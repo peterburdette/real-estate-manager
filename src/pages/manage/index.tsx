@@ -10,7 +10,7 @@ const Manage = () => {
 
   return (
     <div className="min-h-full">
-      <div className={`py-24 pb-32 ${styles.customBackgroundColor}`}>
+      <div className={`pb-32 ${styles.customBackgroundColor}`}>
         <header className="py-10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold tracking-tight text-white">
