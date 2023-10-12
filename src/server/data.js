@@ -90,6 +90,27 @@ const data = [
     ],
     notes: 'This is another test note.',
   },
+  {
+    id: '5',
+    address: '101 Lorem Ipsum Way',
+    city: 'Roanoke',
+    state: 'IL',
+    zip: 61561,
+    propertyValue: 150000,
+    monthlyRentalIncome: 800,
+    squareFeet: 1650,
+    bedrooms: 3,
+    bathrooms: 2,
+    availability: 'Available',
+    images: [
+      'https://imageio.forbes.com/specials-images/imageserve/1026205392/Beautiful-luxury-home-exterior-at-twilight/960x0.jpg',
+      'https://www.mydomaine.com/thmb/KDUEgNEX2lmp4xuLQYVq3pixM1E=/1512x1512/smart/filters:no_upscale()/Blue-Bedroom-1brextoncole-e55677e5459841e481f2dacf2e04300c.jpeg',
+      'https://imageio.forbes.com/specials-images/imageserve/5ffdfc89a676bc1fa37f33cb/Black-and-white-bathroom-with-deep-tub-and-large-shower-/960x0.jpg',
+      'https://www.forbes.com/advisor/wp-content/uploads/2021/03/featured-image-kitchen-renovation.jpg',
+    ],
+    amenities: ['Jogging Area', 'WiFi Internet'],
+    notes: 'This is another test note, ok?',
+  },
 ];
 
 export default data;
