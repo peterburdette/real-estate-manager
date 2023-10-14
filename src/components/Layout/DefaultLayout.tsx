@@ -7,10 +7,7 @@ import {
   HomeIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-import {
-  ChevronUpDownIcon,
-  MagnifyingGlassIcon,
-} from '@heroicons/react/20/solid';
+import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import blueLogo from '../../../public/images/logo-blue.svg';
 import profile from '../../../public/images/profile.jpg';
 import { useRouter } from 'next/router';
@@ -243,7 +240,7 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
                     <Menu.Item>
                       {({ active }) => (
                         <Link
-                          href="#"
+                          href="/profile"
                           className={classNames(
                             active
                               ? 'bg-gray-100 text-gray-900'
@@ -258,22 +255,7 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
                     <Menu.Item>
                       {({ active }) => (
                         <Link
-                          href="#"
-                          className={classNames(
-                            active
-                              ? 'bg-gray-100 text-gray-900'
-                              : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
-                          )}
-                        >
-                          Settings
-                        </Link>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <Link
-                          href="#"
+                          href="/notifications"
                           className={classNames(
                             active
                               ? 'bg-gray-100 text-gray-900'
@@ -282,23 +264,6 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
                           )}
                         >
                           Notifications
-                        </Link>
-                      )}
-                    </Menu.Item>
-                  </div>
-                  <div className="py-1">
-                    <Menu.Item>
-                      {({ active }) => (
-                        <Link
-                          href="#"
-                          className={classNames(
-                            active
-                              ? 'bg-gray-100 text-gray-900'
-                              : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
-                          )}
-                        >
-                          Get desktop app
                         </Link>
                       )}
                     </Menu.Item>
@@ -448,7 +413,7 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              href="#"
+                              href="/profile"
                               className={classNames(
                                 active
                                   ? 'bg-gray-100 text-gray-900'
@@ -463,22 +428,7 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              href="/settings"
-                              className={classNames(
-                                active
-                                  ? 'bg-gray-100 text-gray-900'
-                                  : 'text-gray-700',
-                                'block px-4 py-2 text-sm'
-                              )}
-                            >
-                              Settings
-                            </Link>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <Link
-                              href="#"
+                              href="/notifications"
                               className={classNames(
                                 active
                                   ? 'bg-gray-100 text-gray-900'
@@ -487,23 +437,6 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
                               )}
                             >
                               Notifications
-                            </Link>
-                          )}
-                        </Menu.Item>
-                      </div>
-                      <div className="py-1">
-                        <Menu.Item>
-                          {({ active }) => (
-                            <Link
-                              href="#"
-                              className={classNames(
-                                active
-                                  ? 'bg-gray-100 text-gray-900'
-                                  : 'text-gray-700',
-                                'block px-4 py-2 text-sm'
-                              )}
-                            >
-                              Get desktop app
                             </Link>
                           )}
                         </Menu.Item>
