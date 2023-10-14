@@ -10,20 +10,8 @@ const Manage = () => {
 
   return (
     <div className="min-h-full">
-      <div className={`pb-32 ${styles.customBackgroundColor}`}>
-        <header className="py-10">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-white">
-              Manage
-            </h1>
-          </div>
-        </header>
-      </div>
-
-      <div className="-mt-32">
-        <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-          <PropertyCardGrid properties={properties} />
-        </div>
+      <div className="mx-auto px-4 pb-12 sm:px-6 lg:px-8">
+        <PropertyCardGrid properties={properties} />
       </div>
     </div>
   );
