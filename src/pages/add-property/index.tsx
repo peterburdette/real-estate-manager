@@ -1,7 +1,7 @@
 import React from 'react';
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid';
 
-export default function AddProperty() {
+const AddProperty = () => {
   return (
     <form>
       <div className="space-y-12">
@@ -433,4 +433,6 @@ export default function AddProperty() {
       </div>
     </form>
   );
-}
+};
+
+export default AddProperty;
