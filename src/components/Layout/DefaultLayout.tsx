@@ -505,9 +505,9 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
             {/* Page Content */}
             <div className="mt-6 px-4 sm:px-6 lg:px-8">{children}</div>
           </main>
+          <Footer />
         </div>
       </div>
-      <Footer />
     </>
   );
 };
