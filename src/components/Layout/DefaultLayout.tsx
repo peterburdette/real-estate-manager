@@ -2,9 +2,11 @@ import { Fragment, ReactNode, useState } from 'react';
 import { Dialog, Menu, Transition } from '@headlessui/react';
 import {
   Bars3CenterLeftIcon,
-  Bars4Icon,
-  ClockIcon,
-  HomeIcon,
+  FolderIcon,
+  PlusIcon,
+  ChartBarIcon,
+  CalculatorIcon,
+  DocumentIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
@@ -15,12 +17,24 @@ import Footer from '../Footer/Footer';
 import Link from 'next/link';
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
-  { name: 'Manage', href: '/manage', icon: Bars4Icon, current: false },
+  { name: 'Dashboard', href: '/dashboard', icon: ChartBarIcon, current: true },
+  { name: 'Manage', href: '/manage', icon: FolderIcon, current: false },
   {
     name: 'Add Property',
     href: '/add-property',
-    icon: ClockIcon,
+    icon: PlusIcon,
+    current: false,
+  },
+  {
+    name: 'Rent Calculator',
+    href: '/calculator',
+    icon: CalculatorIcon,
+    current: false,
+  },
+  {
+    name: 'Downloads',
+    href: '/downloads',
+    icon: DocumentIcon,
     current: false,
   },
 ];
@@ -42,15 +56,13 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
     // Remove leading slash and capitalize the first letter
     return route.substring(1, 2).toUpperCase() + route.substring(2);
   };
-  
+
   // Extract the current page's name based on the route.
   const currentRoute = router.asPath; // Use router.asPath to include the full path, including the slug
   const pageTitle = formatPageName(currentRoute);
   const currentPage =
     navigation.find((item) => currentRoute.startsWith(item.href))?.name ||
     pageTitle;
-
-  
 
   // Function to check if the current route starts with a navigation item's href
   const isCurrent = (navItem: string) => currentRoute.startsWith(navItem);
