@@ -43,6 +43,9 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
   const currentPage =
     navigation.find((item) => item.href === currentRoute)?.name || 'Unknown';
 
+  // Function to check if the current route starts with a navigation item's href
+  const isCurrent = (navItem: string) => currentRoute.startsWith(navItem);
+
   return (
     <>
       <div className="min-h-full">
@@ -119,16 +122,16 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
                             key={item.name}
                             href={item.href}
                             className={classNames(
-                              item.current
-                                ? 'bg-gray-100 text-gray-900'
-                                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                              'group flex items-center rounded-md px-2 py-2 text-base font-medium leading-5'
+                              isCurrent(item.href)
+                                ? 'bg-gray-200 text-gray-900'
+                                : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900',
+                              'group flex items-center rounded-md px-2 py-2 text-sm font-medium'
                             )}
                             aria-current={item.current ? 'page' : undefined}
                           >
                             <item.icon
                               className={classNames(
-                                item.current
+                                isCurrent(item.href)
                                   ? 'text-gray-500'
                                   : 'text-gray-400 group-hover:text-gray-500',
                                 'mr-3 h-6 w-6 flex-shrink-0'
@@ -312,7 +315,7 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
                     key={item.name}
                     href={item.href}
                     className={classNames(
-                      item.current
+                      isCurrent(item.href)
                         ? 'bg-gray-200 text-gray-900'
                         : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900',
                       'group flex items-center rounded-md px-2 py-2 text-sm font-medium'
@@ -321,7 +324,7 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
                   >
                     <item.icon
                       className={classNames(
-                        item.current
+                        isCurrent(item.href)
                           ? 'text-gray-500'
                           : 'text-gray-400 group-hover:text-gray-500',
                         'mr-3 h-6 w-6 flex-shrink-0'
