@@ -13,7 +13,7 @@ const SelectInputField: React.FC<SelectInputFieldProps> = ({
   name,
   options,
 }) => (
-  <div className="sm:col-span-3">
+  <>
     <label
       htmlFor={id}
       className="block text-sm font-medium leading-6 text-gray-900"
@@ -31,7 +31,7 @@ const SelectInputField: React.FC<SelectInputFieldProps> = ({
         ))}
       </select>
     </div>
-  </div>
+  </>
 );
 
 export default SelectInputField;
