@@ -38,10 +38,19 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const router = useRouter();
 
+  const formatPageName = (route: string) => {
+    // Remove leading slash and capitalize the first letter
+    return route.substring(1, 2).toUpperCase() + route.substring(2);
+  };
+  
   // Extract the current page's name based on the route.
-  const currentRoute = router.pathname;
+  const currentRoute = router.asPath; // Use router.asPath to include the full path, including the slug
+  const pageTitle = formatPageName(currentRoute);
   const currentPage =
-    navigation.find((item) => item.href === currentRoute)?.name || 'Unknown';
+    navigation.find((item) => currentRoute.startsWith(item.href))?.name ||
+    pageTitle;
+
+  
 
   // Function to check if the current route starts with a navigation item's href
   const isCurrent = (navItem: string) => currentRoute.startsWith(navItem);
