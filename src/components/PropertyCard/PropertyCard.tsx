@@ -23,7 +23,7 @@ const PropertyCard = (props: any) => {
       <div className="flex flex-1 flex-col p-3">
         <Link href={`/manage/${props.property.id}`}>
           <img
-            src={props.property.images[0]}
+            src={props.property.image}
             alt=""
             className={`${styles.cardImg} pointer-events-none object-cover group-hover:opacity-75`}
           />

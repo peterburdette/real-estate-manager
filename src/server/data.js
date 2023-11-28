@@ -11,9 +11,8 @@ const data = [
     bedrooms: 1,
     bathrooms: 1,
     availability: 'Available',
-    images: [
+    image:
       'https://static.onecms.io/wp-content/uploads/sites/37/2016/02/15230656/white-modern-house-curved-patio-archway-c0a4a3b3.jpg',
-    ],
     amenities: ['Jogging Area', 'Clubhouse Pool'],
     notes:
       'Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu.',
@@ -30,10 +29,8 @@ const data = [
     bedrooms: 2,
     bathrooms: 2,
     availability: 'Not Available',
-    images: [
+    image:
       'https://images.adsttc.com/media/images/5ecd/d4ac/b357/65c6/7300/009d/large_jpg/02C.jpg',
-      'https://www.forbes.com/advisor/wp-content/uploads/2021/03/featured-image-kitchen-renovation.jpg',
-    ],
     amenities: ['Jogging Area', 'Clubhouse Pool', 'Tennis Court'],
     notes: 'Testing notes.',
   },
@@ -49,11 +46,8 @@ const data = [
     bedrooms: 3,
     bathrooms: 3,
     availability: 'Available',
-    images: [
+    image:
       'https://9b16f79ca967fd0708d1-2713572fef44aa49ec323e813b06d2d9.ssl.cf2.rackcdn.com/1140x_a10-7_cTC/BH-Oakmont-211-2nd-st-46-6-1624611939.jpg',
-      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/kitchen-decor-ideas-colorful-light-fixture-1580422708.jpg',
-      'https://furnitureurban.com/wp-content/uploads/2019/05/vesper-marble-dining-room-set-a.jpg',
-    ],
     amenities: [
       'Jogging Area',
       'Clubhouse Pool',
@@ -74,12 +68,8 @@ const data = [
     bedrooms: 4,
     bathrooms: 4,
     availability: 'Not Available',
-    images: [
+    image:
       'https://imageio.forbes.com/specials-images/imageserve/1026205392/Beautiful-luxury-home-exterior-at-twilight/960x0.jpg',
-      'https://www.mydomaine.com/thmb/KDUEgNEX2lmp4xuLQYVq3pixM1E=/1512x1512/smart/filters:no_upscale()/Blue-Bedroom-1brextoncole-e55677e5459841e481f2dacf2e04300c.jpeg',
-      'https://imageio.forbes.com/specials-images/imageserve/5ffdfc89a676bc1fa37f33cb/Black-and-white-bathroom-with-deep-tub-and-large-shower-/960x0.jpg',
-      'https://www.forbes.com/advisor/wp-content/uploads/2021/03/featured-image-kitchen-renovation.jpg',
-    ],
     amenities: [
       'Jogging Area',
       'Clubhouse Pool',
@@ -102,12 +92,8 @@ const data = [
     bedrooms: 3,
     bathrooms: 2,
     availability: 'Available',
-    images: [
+    image:
       'https://imageio.forbes.com/specials-images/imageserve/1026205392/Beautiful-luxury-home-exterior-at-twilight/960x0.jpg',
-      'https://www.mydomaine.com/thmb/KDUEgNEX2lmp4xuLQYVq3pixM1E=/1512x1512/smart/filters:no_upscale()/Blue-Bedroom-1brextoncole-e55677e5459841e481f2dacf2e04300c.jpeg',
-      'https://imageio.forbes.com/specials-images/imageserve/5ffdfc89a676bc1fa37f33cb/Black-and-white-bathroom-with-deep-tub-and-large-shower-/960x0.jpg',
-      'https://www.forbes.com/advisor/wp-content/uploads/2021/03/featured-image-kitchen-renovation.jpg',
-    ],
     amenities: ['Jogging Area', 'WiFi Internet'],
     notes: 'This is another test note, ok?',
   },
