@@ -511,7 +511,7 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
                   {currentPage}
                 </h1>
               </div>
-              <div className="mt-4 flex sm:ml-4 sm:mt-0">
+              {/* <div className="mt-4 flex sm:ml-4 sm:mt-0">
                 <button
                   type="button"
                   className="sm:order-0 order-1 ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:ml-0"
@@ -524,7 +524,7 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
                 >
                   Create
                 </button>
-              </div>
+              </div> */}
             </div>
             {/* Page Content */}
             <div className="mt-6 px-4 sm:px-6 lg:px-8">{children}</div>
