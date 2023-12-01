@@ -6,7 +6,6 @@ const PropertyCardGrid = (props: any) => {
   // retrieves the current route
   const router = useRouter();
   const currentPath = router.pathname;
-
   return (
     <ul
       role="list"
