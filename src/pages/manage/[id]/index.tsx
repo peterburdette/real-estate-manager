@@ -60,7 +60,7 @@ const PropertyDetail: NextPage<PropertyDetailProps> = ({ property }) => {
 
   return (
     <>
-      <div className="mx-auto">
+      <div className="mx-auto border-b border-gray-900/10 pb-12">
         <div className="flex justify-between items-center px-4 sm:px-0">
           <div>
             <h3 className="text-base font-semibold leading-7 text-gray-900">

@@ -21,7 +21,7 @@ const data = [
 
 const DataTable = () => {
   return (
-    <div className="px-">
+    <div className="mx-auto border-b border-gray-900/10 pb-12">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h1 className="text-base font-semibold leading-6 text-gray-900">

@@ -467,7 +467,7 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              href="#"
+                              href="/support"
                               className={classNames(
                                 active
                                   ? 'bg-gray-100 text-gray-900'
