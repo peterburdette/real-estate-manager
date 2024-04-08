@@ -22,7 +22,7 @@ interface PropertyDetailProps {
     image: string;
     amenities: string[];
     notes: string;
-  }[];
+  };
   error?: boolean;
 }
 
@@ -35,9 +35,10 @@ const PropertyDetail: NextPage<PropertyDetailProps> = ({ property }) => {
   // }
 
   const handleDropdownSelect = (option: string) => {
-    if (option === 'Delete') {
-      deletePropertyHandler(property.id);
-    }
+    // if (option === 'Delete') {
+    //   deletePropertyHandler(property.id);
+    // }
+    console.log('deleted');
   };
 
   // const deletePropertyHandler = async (id: string) => {
@@ -168,7 +169,7 @@ const PropertyDetail: NextPage<PropertyDetailProps> = ({ property }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { params } = context;
-  const propertyId = params.id;
+  const propertyId = params!.id;
   const property = properties
     .filter((property) => property.id === propertyId)
     .pop();
