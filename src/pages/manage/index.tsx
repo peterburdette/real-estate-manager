@@ -1,7 +1,6 @@
 import React from 'react';
-import styles from './Manage.module.css';
+// import styles from './Manage.module.css';
 import PropertyCardGrid from '../../components/PropertyCardGrid/PropertyCardGrid';
-import Property from '../../models/property';
 import properties from '@/server/data';
 
 const Manage = ({ data }: { data: any }) => {
