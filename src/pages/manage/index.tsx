@@ -1,12 +1,10 @@
 import React from 'react';
 import styles from './Manage.module.css';
 import PropertyCardGrid from '../../components/PropertyCardGrid/PropertyCardGrid';
-import { useSelector } from 'react-redux';
-import connectDB from '../../server/db';
 import Property from '../../models/property';
+import properties from '@/server/data';
 
 const Manage = ({ data }: { data: any }) => {
-  console.log('data: ', data);
   return (
     <div className="min-h-full">
       <div className="mx-auto px-4 pb-12 sm:px-6 lg:px-8">
@@ -16,17 +14,15 @@ const Manage = ({ data }: { data: any }) => {
   );
 };
 
-export async function getServerSideProps() {
-  await connectDB();
-
+export const getServerSideProps = async () => {
   try {
     // Fetch all property data from the database
-    const data = await Property.find({});
+    const data = properties;
 
     // Pass property data to the component
     return {
       props: {
-        data: JSON.parse(JSON.stringify(data)),
+        data,
         error: false,
       },
     };
@@ -39,6 +35,6 @@ export async function getServerSideProps() {
       },
     };
   }
-}
+};
 
 export default Manage;
