@@ -89,7 +89,7 @@ const PropertyDetail: NextPage<PropertyDetailProps> = ({ property }) => {
 
         <div className="mt-6 border-t border-gray-100">
           <dl className="divide-y divide-gray-100">
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <div className="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
                 Address
               </dt>
@@ -105,7 +105,7 @@ const PropertyDetail: NextPage<PropertyDetailProps> = ({ property }) => {
                 </span>
               </dd>
             </div>
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <div className="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
                 Availability
               </dt>
@@ -113,7 +113,7 @@ const PropertyDetail: NextPage<PropertyDetailProps> = ({ property }) => {
                 <span className="flex-grow">{property.availability}</span>
               </dd>
             </div>
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <div className="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
                 Amenities
               </dt>
@@ -132,7 +132,7 @@ const PropertyDetail: NextPage<PropertyDetailProps> = ({ property }) => {
                 )}
               </dd>
             </div>
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <div className="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
                 Property Value
               </dt>
@@ -142,7 +142,7 @@ const PropertyDetail: NextPage<PropertyDetailProps> = ({ property }) => {
                 </span>
               </dd>
             </div>
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <div className="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
                 Monthly Rent Rate
               </dt>
@@ -152,7 +152,7 @@ const PropertyDetail: NextPage<PropertyDetailProps> = ({ property }) => {
                 </span>
               </dd>
             </div>
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <div className="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
                 Notes
               </dt>
