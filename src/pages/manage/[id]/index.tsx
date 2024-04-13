@@ -42,8 +42,9 @@ const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
   const handleDropdownSelect = (option: string) => {
     if (option === 'Delete') {
       deletePropertyHandler(property.id);
+    } else {
+      setIsModalOpen(true);
     }
-    setIsModalOpen(true);
   };
 
   const deletePropertyHandler = async (id: string) => {
