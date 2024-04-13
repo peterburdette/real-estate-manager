@@ -1,5 +1,5 @@
 import PropertyCardGrid from '@/components/PropertyCardGrid/PropertyCardGrid';
-import { GetProperties } from '@/server/properties/GetPropertiesApi';
+import { getProperties } from '@/server/properties/getPropertiesApi';
 
 const Manage = ({ data }: { data: any }) => {
   return (
@@ -13,7 +13,7 @@ const Manage = ({ data }: { data: any }) => {
 
 export const getServerSideProps = async () => {
   try {
-    const data = await GetProperties();
+    const data = await getProperties();
 
     return {
       props: {

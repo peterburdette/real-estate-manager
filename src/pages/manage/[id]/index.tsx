@@ -5,7 +5,7 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import Modal from '@/components/Modal/Modal';
-import { GetPropertyById } from '@/server/properties/GetPropertyByIdApi';
+import { getPropertyById } from '@/server/properties/getPropertyByIdApi';
 
 interface PropertyDetailProps {
   property: {
@@ -49,15 +49,13 @@ const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
 
   const deletePropertyHandler = async (id: string) => {
     console.log(`Property ${id} was deleted.`);
-    // // Check if the property was deleted successfully
-    // if (result.deletedCount === 1) {
-    //   console.log(`Property with ID ${id} deleted successfully`);
-    // } else {
-    //   console.log(`Property with ID ${id} not found`);
-    // }
+    try {
+    } catch (error: any) {
+      console.error('Error deleting property:', error.message);
+    }
 
     // // Redirect to the manage page
-    // router.push('/manage');
+    router.push('/manage');
   };
 
   return (
@@ -188,7 +186,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   try {
-    const property = await GetPropertyById(propertyId);
+    const property = await getPropertyById(propertyId);
 
     return {
       props: {

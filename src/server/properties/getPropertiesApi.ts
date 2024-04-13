@@ -1,7 +1,7 @@
 import axios from 'axios';
-import API_BASE_URL from './../apiConfig';
+import API_BASE_URL from '../apiConfig';
 
-export const GetProperties = async () => {
+export const getProperties = async () => {
   try {
     const response = await axios.get(`${API_BASE_URL}/properties/`);
     return response.data;
