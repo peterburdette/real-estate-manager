@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useCurrencyFormatter from '@/hooks/useCurrencyFormatter';
 import DropdownInputField from '@/components/Fields/DropdownInputField';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import properties from '@/server/data';
 import { GetServerSideProps } from 'next';
+import Modal from '@/components/Modal/Modal';
+import { GetPropertyById } from '@/server/properties/GetPropertyByIdApi';
 
 interface PropertyDetailProps {
   property: {
@@ -26,37 +27,37 @@ interface PropertyDetailProps {
   error?: boolean;
 }
 
-const PropertyDetail: NextPage<PropertyDetailProps> = ({ property }) => {
+const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
+  property,
+  error,
+}) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
-  // if (error) {
-  //   // Handle the case when no data is available
-  //   return <p>No property data available.</p>;
-  // }
+  if (error) {
+    // Handle the case when no data is available
+    return <p>No property data available.</p>;
+  }
 
   const handleDropdownSelect = (option: string) => {
-    // if (option === 'Delete') {
-    //   deletePropertyHandler(property.id);
-    // }
-    console.log('deleted');
+    if (option === 'Delete') {
+      deletePropertyHandler(property.id);
+    }
+    setIsModalOpen(true);
   };
 
-  // const deletePropertyHandler = async (id: string) => {
+  const deletePropertyHandler = async (id: string) => {
+    console.log(`Property ${id} was deleted.`);
+    // // Check if the property was deleted successfully
+    // if (result.deletedCount === 1) {
+    //   console.log(`Property with ID ${id} deleted successfully`);
+    // } else {
+    //   console.log(`Property with ID ${id} not found`);
+    // }
 
-  //     // Check if the property was deleted successfully
-  //     if (result.deletedCount === 1) {
-  //       console.log(`Property with ID ${id} deleted successfully`);
-  //     } else {
-  //       console.log(`Property with ID ${id} not found`);
-  //     }
-
-  //     // Redirect to the manage page
-  //     router.push('/manage');
-  //   } catch (error: any) {
-  //     console.error('Error deleting property:', error.message);
-  //     // Handle the error, e.g., show an error message to the user
-  //   }
-  // };
+    // // Redirect to the manage page
+    // router.push('/manage');
+  };
 
   return (
     <>
@@ -163,6 +164,10 @@ const PropertyDetail: NextPage<PropertyDetailProps> = ({ property }) => {
           </dl>
         </div>
       </div>
+      <Modal
+        isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
+      />
     </>
   );
 };
@@ -170,18 +175,34 @@ const PropertyDetail: NextPage<PropertyDetailProps> = ({ property }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { params } = context;
   const propertyId = params!.id;
-  const property = properties
-    .filter((property) => property.id === propertyId)
-    .pop();
 
-  // Pass property data to the component
-  return {
-    props: {
-      property,
-    },
-  };
+  // Check if params and params.id are available and params.id is a string
+  if (!params || typeof propertyId !== 'string') {
+    // Handle the case when params or params.id is not available or not a string
+    return {
+      props: {
+        error: true,
+      },
+    };
+  }
+
+  try {
+    const property = await GetPropertyById(propertyId);
+
+    return {
+      props: {
+        property,
+      },
+    };
+  } catch (error: any) {
+    console.error('Error fetching property data:', error.message);
+
+    return {
+      props: {
+        error: true,
+      },
+    };
+  }
 };
 
-export default PropertyDetail;
-
-// WORKING COPY
+export default PropertyDetailPage;

@@ -1,7 +1,5 @@
-import React from 'react';
-// import styles from './Manage.module.css';
-import PropertyCardGrid from '../../components/PropertyCardGrid/PropertyCardGrid';
-import properties from '@/server/data';
+import PropertyCardGrid from '@/components/PropertyCardGrid/PropertyCardGrid';
+import { GetProperties } from '@/server/properties/GetPropertiesApi';
 
 const Manage = ({ data }: { data: any }) => {
   return (
@@ -15,10 +13,8 @@ const Manage = ({ data }: { data: any }) => {
 
 export const getServerSideProps = async () => {
   try {
-    // Fetch all property data from the database
-    const data = properties;
+    const data = await GetProperties();
 
-    // Pass property data to the component
     return {
       props: {
         data,
