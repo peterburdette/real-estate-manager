@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import Modal from '@/components/Modal/Modal';
 import { getPropertyById } from '@/server/properties/getPropertyByIdApi';
+import { deletePropertyById } from '@/server/properties/deletePropertyByIdApi';
 
 interface PropertyDetailProps {
   property: {
@@ -50,6 +51,7 @@ const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
   const deletePropertyHandler = async (id: string) => {
     console.log(`Property ${id} was deleted.`);
     try {
+      await deletePropertyById(id);
     } catch (error: any) {
       console.error('Error deleting property:', error.message);
     }
