@@ -7,7 +7,11 @@ import { GetServerSideProps } from 'next';
 import Modal from '@/components/Modal/Modal';
 import { getPropertyById } from '@/server/properties/getPropertyByIdApi';
 import { deletePropertyById } from '@/server/properties/deletePropertyByIdApi';
-import { useSnackbar } from 'notistack';
+import { OptionsObject, useSnackbar } from 'notistack';
+import {
+  CheckCircleIcon,
+  ExclamationCircleIcon,
+} from '@heroicons/react/24/solid';
 
 interface PropertyDetailProps {
   property: {
@@ -28,6 +32,10 @@ interface PropertyDetailProps {
   };
   error?: boolean;
 }
+
+type CustomOptionsObject = OptionsObject<'notification'> & {
+  icon?: React.ReactNode;
+};
 
 const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
   property,
@@ -54,10 +62,26 @@ const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
     try {
       await deletePropertyById(id);
       router.push('/manage');
-      enqueueSnackbar('Property deleted.', { variant: 'notification' });
+      enqueueSnackbar('Property deleted.', {
+        variant: 'notification',
+        icon: (
+          <CheckCircleIcon
+            className="h-6 w-6 text-green-400"
+            aria-hidden="true"
+          />
+        ),
+      } as CustomOptionsObject);
     } catch (error: any) {
       console.error('Error deleting property:', error.message);
-      enqueueSnackbar('Error deleting property.', { variant: 'notification' });
+      enqueueSnackbar('Error deleting property.', {
+        variant: 'notification',
+        icon: (
+          <ExclamationCircleIcon
+            className="h-6 w-6 text-red-400"
+            aria-hidden="true"
+          />
+        ),
+      } as CustomOptionsObject);
     }
   };
 

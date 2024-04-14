@@ -1,15 +1,15 @@
-import { useState, forwardRef, useCallback } from 'react';
+import { forwardRef, useCallback } from 'react';
 import { useSnackbar, SnackbarContent } from 'notistack';
-import { CheckCircleIcon } from '@heroicons/react/24/outline';
 import { XMarkIcon } from '@heroicons/react/20/solid';
 
 interface NotificationProps {
   id: string;
   message: string;
+  icon: React.ReactNode;
 }
 
 const Notification = forwardRef<HTMLDivElement, NotificationProps>(
-  ({ id, ...props }, ref) => {
+  ({ id, message, icon, ...props }, ref) => {
     const { closeSnackbar } = useSnackbar();
 
     const handleDismiss = useCallback(() => {
@@ -27,15 +27,10 @@ const Notification = forwardRef<HTMLDivElement, NotificationProps>(
             <div className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
               <div className="p-4">
                 <div className="flex items-start">
-                  <div className="flex-shrink-0">
-                    <CheckCircleIcon
-                      className="h-6 w-6 text-green-400"
-                      aria-hidden="true"
-                    />
-                  </div>
+                  <div className="flex-shrink-0">{icon}</div>
                   <div className="ml-3 w-0 flex-1 pt-0.5">
                     <p className="text-sm font-medium text-gray-900 whitespace-nowrap">
-                      {props.message}
+                      {message}
                     </p>
                   </div>
                   <div className="ml-4 flex flex-shrink-0">
