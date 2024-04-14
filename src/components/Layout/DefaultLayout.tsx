@@ -26,22 +26,16 @@ const navigation = [
     current: false,
   },
   {
-    name: 'Rent Calculator',
-    href: '/calculator',
-    icon: CalculatorIcon,
-    current: false,
-  },
-  {
     name: 'Downloads',
     href: '/downloads',
     icon: DocumentIcon,
     current: false,
   },
 ];
-const teams = [
-  { name: 'Engineering', href: '#', bgColorClass: 'bg-indigo-500' },
-  { name: 'Human Resources', href: '#', bgColorClass: 'bg-green-500' },
-  { name: 'Customer Success', href: '#', bgColorClass: 'bg-yellow-500' },
+const groups = [
+  { name: 'Tenants', href: '#', bgColorClass: 'bg-indigo-500' },
+  { name: 'Applicants', href: '#', bgColorClass: 'bg-green-500' },
+  { name: 'Contractors', href: '#', bgColorClass: 'bg-yellow-500' },
 ];
 
 const classNames = (...classes: any) => {
@@ -166,29 +160,29 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
                       <div className="mt-8">
                         <h3
                           className="px-3 text-sm font-medium text-gray-500"
-                          id="mobile-teams-headline"
+                          id="mobile-groups-headline"
                         >
-                          Teams
+                          Groups
                         </h3>
                         <div
                           className="mt-1 space-y-1"
                           role="group"
-                          aria-labelledby="mobile-teams-headline"
+                          aria-labelledby="mobile-groups-headline"
                         >
-                          {teams.map((team) => (
+                          {groups.map((person) => (
                             <Link
-                              key={team.name}
-                              href={team.href}
+                              key={person.name}
+                              href={person.href}
                               className="group flex items-center rounded-md px-3 py-2 text-base font-medium leading-5 text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                             >
                               <span
                                 className={classNames(
-                                  team.bgColorClass,
+                                  person.bgColorClass,
                                   'mr-4 h-2.5 w-2.5 rounded-full'
                                 )}
                                 aria-hidden="true"
                               />
-                              <span className="truncate">{team.name}</span>
+                              <span className="truncate">{person.name}</span>
                             </Link>
                           ))}
                         </div>
@@ -360,29 +354,29 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
                 {/* Secondary navigation */}
                 <h3
                   className="px-3 text-sm font-medium text-gray-500"
-                  id="desktop-teams-headline"
+                  id="desktop-groups-headline"
                 >
-                  Teams
+                  Groups
                 </h3>
                 <div
                   className="mt-1 space-y-1"
                   role="group"
-                  aria-labelledby="desktop-teams-headline"
+                  aria-labelledby="desktop-groups-headline"
                 >
-                  {teams.map((team) => (
+                  {groups.map((person) => (
                     <Link
-                      key={team.name}
-                      href={team.href}
+                      key={person.name}
+                      href={person.href}
                       className="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
                     >
                       <span
                         className={classNames(
-                          team.bgColorClass,
+                          person.bgColorClass,
                           'mr-4 h-2.5 w-2.5 rounded-full'
                         )}
                         aria-hidden="true"
                       />
-                      <span className="truncate">{team.name}</span>
+                      <span className="truncate">{person.name}</span>
                     </Link>
                   ))}
                 </div>
