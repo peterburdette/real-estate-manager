@@ -7,6 +7,14 @@ import { AppProps } from 'next/app';
 import 'tailwindcss/tailwind.css';
 import { useRouter } from 'next/router';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
+import { SnackbarProvider } from 'notistack';
+import Notification from '@/components/Notification/Notification';
+
+declare module 'notistack' {
+  interface VariantOverrides {
+    notification: true;
+  }
+}
 
 const App: NextPage<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -14,15 +22,26 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 
   return (
     <Provider store={store}>
-      {currentPath === '/' ? (
-        <HomeLayout>
-          <Component {...pageProps} />
-        </HomeLayout>
-      ) : (
-        <DefaultLayout>
-          <Component {...pageProps} />
-        </DefaultLayout>
-      )}
+      <SnackbarProvider
+        Components={{
+          notification: Notification,
+        }}
+        maxSnack={3}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+      >
+        {currentPath === '/' ? (
+          <HomeLayout>
+            <Component {...pageProps} />
+          </HomeLayout>
+        ) : (
+          <DefaultLayout>
+            <Component {...pageProps} />
+          </DefaultLayout>
+        )}
+      </SnackbarProvider>
     </Provider>
   );
 };
