@@ -1,15 +1,7 @@
-.cardImg {
-  height: 184px;
-}
-
 .button:hover {
   cursor: pointer;
 }
 
-.icon {
-  font-size: 1.25em;
-}
-
-.favorited {
-  color: #db1c25;
+.button:active {
+  background-color: rgba(0, 0, 0, 0.03);
 }
