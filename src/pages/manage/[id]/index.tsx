@@ -7,6 +7,7 @@ import { GetServerSideProps } from 'next';
 import Modal from '@/components/Modal/Modal';
 import { getPropertyById } from '@/server/properties/getPropertyByIdApi';
 import { deletePropertyById } from '@/server/properties/deletePropertyByIdApi';
+import { useSnackbar } from 'notistack';
 
 interface PropertyDetailProps {
   property: {
@@ -34,6 +35,7 @@ const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
 
   if (error) {
     // Handle the case when no data is available
@@ -49,15 +51,14 @@ const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
   };
 
   const deletePropertyHandler = async (id: string) => {
-    console.log(`Property ${id} was deleted.`);
     try {
       await deletePropertyById(id);
+      router.push('/manage');
+      enqueueSnackbar('Property deleted.', { variant: 'notification' });
     } catch (error: any) {
       console.error('Error deleting property:', error.message);
+      enqueueSnackbar('Error deleting property.', { variant: 'notification' });
     }
-
-    // // Redirect to the manage page
-    router.push('/manage');
   };
 
   return (
