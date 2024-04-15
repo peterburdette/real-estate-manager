@@ -12,6 +12,7 @@ import {
   CheckCircleIcon,
   ExclamationCircleIcon,
 } from '@heroicons/react/24/solid';
+import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 
 interface PropertyDetailProps {
   property: {
@@ -89,6 +90,16 @@ const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
     <>
       <div className="mx-auto border-b border-gray-900/10 pb-12">
         <div className="flex justify-between items-center px-4 sm:px-0">
+          <Breadcrumbs />
+          <div className="ml-4">
+            <DropdownInputField
+              name="Manage"
+              options={['Edit', 'Delete']}
+              onSelect={handleDropdownSelect}
+            />
+          </div>
+        </div>
+        <div className="flex justify-between items-center px-4 mt-6 sm:px-0">
           <div>
             <h3 className="text-base font-semibold leading-7 text-gray-900">
               Property Details
@@ -96,13 +107,6 @@ const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
             <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
               Personal details and application.
             </p>
-          </div>
-          <div className="ml-4">
-            <DropdownInputField
-              name="Manage"
-              options={['Edit', 'Delete']}
-              onSelect={handleDropdownSelect}
-            />
           </div>
         </div>
 
@@ -193,6 +197,7 @@ const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
       <Modal
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
+        message="test message"
       />
     </>
   );
