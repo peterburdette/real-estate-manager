@@ -5,9 +5,10 @@ import { Dialog } from '@headlessui/react';
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  message?: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen, message }) => {
   const cancelButtonRef = useRef(null);
 
   return (
@@ -51,14 +52,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
                       as="h3"
                       className="text-lg font-medium text-gray-900"
                     >
-                      Deactivate Account
+                      Edit Property
                     </Dialog.Title>
                     <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        Are you sure you want to deactivate your account? All of
-                        your data will be permanently removed. This action
-                        cannot be undone.
-                      </p>
+                      <p className="text-sm text-gray-500">{message}</p>
                     </div>
                   </div>
                 </div>
@@ -66,18 +63,18 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
               <div className="rounded-lg p-4 bg-gray-50 flex justify-end">
                 <button
                   type="button"
-                  className="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Deactivate
-                </button>
-                <button
-                  type="button"
-                  className="ml-3 inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                  className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                   onClick={() => setIsOpen(false)}
                   ref={cancelButtonRef}
                 >
                   Cancel
+                </button>
+                <button
+                  type="button"
+                  className="ml-3 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Save Changes
                 </button>
               </div>
             </div>
