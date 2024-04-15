@@ -5,7 +5,6 @@ import {
   FolderIcon,
   PlusIcon,
   ChartBarIcon,
-  CalculatorIcon,
   DocumentIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
@@ -288,7 +287,7 @@ const DefaultLayout = ({ children }: { children: ReactNode }) => {
                     <Menu.Item>
                       {({ active }) => (
                         <Link
-                          href="#"
+                          href="/support"
                           className={classNames(
                             active
                               ? 'bg-gray-100 text-gray-900'
