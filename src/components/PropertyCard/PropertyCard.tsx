@@ -1,70 +1,56 @@
 import React from 'react';
 import Link from 'next/link';
-import styles from './PropertyCard.module.css';
-import { EyeIcon, XMarkIcon } from '@heroicons/react/20/solid';
+import { useRouter } from 'next/router';
 
 const PropertyCard = ({ property, onDelete }: any) => {
+  const router = useRouter();
+
+  const handleViewClick = () => {
+    router.push(`/manage/${property.id}`);
+  };
+
   return (
-    <li
-      key={property.id}
-      className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow"
-    >
-      <div className="flex flex-1 flex-col p-3">
+    <div className="bg-white rounded-xl shadow-md overflow-hidden sm:max-w-md sm:mx-auto md:w-full">
+      <div className="shrink-0">
         <Link href={`/manage/${property.id}`}>
           <img
-            src={property.image}
-            alt=""
-            className={`${styles.cardImg} pointer-events-none object-cover group-hover:opacity-75`}
+            className="h-48 w-full object-cover"
+            src={`${property.image}`}
+            alt={`${property.address}`}
           />
         </Link>
-
-        <h3 className="mt-6 text-sm font-medium text-gray-900">
-          {property.address}
-          <br />
-          {property.city}, {property.state} {property.zip}
-        </h3>
-        <dl className="mt-1 flex flex-grow flex-col justify-between">
-          <dt className="sr-only">Title</dt>
-          <dd className="text-sm text-gray-500">
-            {property.bedrooms} bds {property.bathrooms} ba &mdash;{' '}
-            {property.squareFeet} sqft
-          </dd>
-          <dt className="sr-only">Availability</dt>
-          <dd className="mt-2">
-            <span
-              className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset ring-green-600/20 ${
-                property.availability === 'Available'
-                  ? 'bg-green-50 text-green-700 ring-green-600/20'
-                  : 'bg-red-50 text-red-700 ring-red-600/20'
-              }`}
-            >
-              {property.availability}
-            </span>
-          </dd>
-        </dl>
       </div>
-      <div>
-        <div className="-mt-px flex divide-x divide-gray-200">
-          <div className="flex w-0 flex-1">
-            <Link
-              className={`relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900 ${styles.button}`}
-              role="button"
-              href={`/manage/${property.id}`}
-            >
-              <EyeIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-            </Link>
-          </div>
-          <div className="-ml-px flex w-0 flex-1">
-            <span
-              className={`relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900 ${styles.button}`}
-              onClick={() => onDelete(property.id)}
-            >
-              <XMarkIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-            </span>
-          </div>
+      <div className="p-8">
+        <div className="mb-3 uppercase tracking-wide">
+          <span
+            className={`inline-flex items-center rounded-full px-2 py-1 ring-1 ring-inset ring-green-600/20 ${
+              property.availability === 'Available'
+                ? 'bg-green-50 text-green-700 text-xs font-medium ring-green-600/20'
+                : 'bg-red-50 text-red-700 text-xs font-medium ring-red-600/20'
+            }`}
+          >
+            {property.availability}
+          </span>
+        </div>
+        <div className="block mt-1 text-lg leading-tight font-medium text-black">
+          {property.address} {property.city}, {property.state} {property.zip}
+        </div>
+        <p className="mt-2 text-slate-500">
+          {property.bedrooms} bds {property.bathrooms} ba &mdash;{' '}
+          {property.squareFeet} sqft
+        </p>
+
+        <div className="mt-5">
+          <button
+            type="button"
+            className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            onClick={handleViewClick}
+          >
+            View Property
+          </button>
         </div>
       </div>
-    </li>
+    </div>
   );
 };
 

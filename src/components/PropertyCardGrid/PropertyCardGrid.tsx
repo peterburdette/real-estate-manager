@@ -46,18 +46,20 @@ const PropertyCardGrid = (props: any) => {
   };
 
   return (
-    <ul
-      role="list"
-      className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
-    >
-      {properties.map((property: any) => (
-        <PropertyCard
-          key={property.id}
-          property={property}
-          onDelete={deletePropertyHandler}
-        />
-      ))}
-    </ul>
+    <>
+      <div
+        role="list"
+        className="grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 max-w-8xl"
+      >
+        {properties.map((property: any) => (
+          <PropertyCard
+            key={property.id}
+            property={property}
+            onDelete={deletePropertyHandler}
+          />
+        ))}
+      </div>
+    </>
   );
 };
 
