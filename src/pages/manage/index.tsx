@@ -1,18 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropertyCardGrid from '@/components/PropertyCardGrid/PropertyCardGrid';
 // import ListView from '@/components/ListView/ListView'; // Import your ListView component
 import { getProperties } from '@/server/properties/getPropertiesApi';
 import { Bars4Icon, Squares2X2Icon } from '@heroicons/react/24/solid';
+import { getViewPropertiesToggleState } from '@/server/appState/getViewPropertiesToggleStateApi';
+import { updateViewPropertiesToggleState } from '@/server/appState/putViewPropertiesToggleStateApi';
 
-const Manage = ({ data }: { data: any }) => {
-  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
+interface ViewModeState {
+  _id: string;
+  id: string;
+  viewMode: 'list' | 'grid';
+}
 
-  const handleListViewClick = () => {
-    setViewMode('list');
-  };
+interface ManageProps {
+  data: any;
+  viewModeState: ViewModeState[];
+}
 
-  const handleGridViewClick = () => {
-    setViewMode('grid');
+const ManagePage = ({ data, viewModeState }: ManageProps) => {
+  const [viewMode, setViewMode] = useState<'list' | 'grid'>(
+    viewModeState[0].viewMode
+  );
+
+  useEffect(() => {
+    const updateDatabase = async () => {
+      try {
+        await updateViewPropertiesToggleState(viewModeState[0].id, viewMode);
+      } catch (error: any) {
+        console.error('Error updating view mode:', error.message);
+      }
+    };
+
+    updateDatabase();
+  }, [viewMode, viewModeState, updateViewPropertiesToggleState]);
+
+  const handleViewModeClick = (newMode: 'list' | 'grid') => {
+    setViewMode(newMode);
   };
 
   return (
@@ -25,7 +48,7 @@ const Manage = ({ data }: { data: any }) => {
               className={`rounded-md p-1.5 text-gray-400 hover:bg-white hover:shadow-sm focus:outline-none ${
                 viewMode === 'list' ? 'bg-white shadow-sm' : ''
               }`}
-              onClick={handleListViewClick}
+              onClick={() => handleViewModeClick('list')}
             >
               <Bars4Icon
                 className="h-5 w-5"
@@ -38,7 +61,7 @@ const Manage = ({ data }: { data: any }) => {
               className={`ml-0.5 rounded-md p-1.5 text-gray-400 hover:bg-white hover:shadow-sm focus:outline-none ${
                 viewMode === 'grid' ? 'bg-white shadow-sm' : ''
               }`}
-              onClick={handleGridViewClick}
+              onClick={() => handleViewModeClick('grid')}
             >
               <Squares2X2Icon
                 className="h-5 w-5"
@@ -61,10 +84,12 @@ const Manage = ({ data }: { data: any }) => {
 export const getServerSideProps = async () => {
   try {
     const data = await getProperties();
+    const viewPropertiesToggleState = await getViewPropertiesToggleState();
 
     return {
       props: {
         data,
+        viewModeState: viewPropertiesToggleState,
         error: false,
       },
     };
@@ -79,4 +104,4 @@ export const getServerSideProps = async () => {
   }
 };
 
-export default Manage;
+export default ManagePage;
