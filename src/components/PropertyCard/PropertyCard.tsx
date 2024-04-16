@@ -21,18 +21,18 @@ const PropertyCard = ({ property, onDelete }: any) => {
         </Link>
       </div>
       <div className="p-8">
-        <div className="mb-3 uppercase tracking-wide">
+        <div className="mb-3 tracking-wide">
           <span
             className={`inline-flex items-center rounded-full px-2 py-1 ring-1 ring-inset ring-green-600/20 ${
               property.availability === 'Available'
-                ? 'bg-green-50 text-green-700 text-xs font-medium ring-green-600/20'
-                : 'bg-red-50 text-red-700 text-xs font-medium ring-red-600/20'
+                ? 'bg-green-50 text-green-700 text-xs ring-green-600/20'
+                : 'bg-red-50 text-red-700 text-xs ring-red-600/20'
             }`}
           >
             {property.availability}
           </span>
         </div>
-        <div className="block mt-1 text-lg leading-tight font-medium text-black">
+        <div className="block mt-1 text-sm leading-tight font-medium text-black">
           {property.address} {property.city}, {property.state} {property.zip}
         </div>
         <p className="mt-2 text-slate-500">
