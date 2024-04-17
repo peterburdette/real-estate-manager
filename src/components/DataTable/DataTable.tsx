@@ -2,7 +2,11 @@ import React from 'react';
 
 interface DataTableProps {
   data: any[];
-  actions?: (string | JSX.Element)[];
+  actions?: {
+    label?: string;
+    icon?: React.ReactNode; // This will accept any React node, including icons
+    onClick: (id: string) => void;
+  }[];
 }
 
 const DataTable: React.FC<DataTableProps> = ({ data, actions }) => {
@@ -15,7 +19,15 @@ const DataTable: React.FC<DataTableProps> = ({ data, actions }) => {
       .join(' ');
   };
 
-  const columns = data.length > 0 ? Object.keys(data[0]) : [];
+  // Filter out the "id" column from the list of columns to render
+  const columns =
+    data.length > 0
+      ? Object.keys(data[0]).filter((column) => column !== 'id')
+      : [];
+
+  const handleActionClick = (id: string, onClick: (id: string) => void) => {
+    onClick(id);
+  };
 
   return (
     <div className="mt-8 overflow-x-auto">
@@ -58,36 +70,55 @@ const DataTable: React.FC<DataTableProps> = ({ data, actions }) => {
                 ))}
                 {actions && actions.length > 0 && (
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    {actions.map((action, actionIndex) => (
-                      <React.Fragment key={actionIndex}>
-                        {typeof action === 'string' ? (
-                          <a
-                            href="#"
-                            className="text-indigo-600 hover:text-indigo-900"
+                    {actions.map((action, actionIndex) =>
+                      action.icon ? (
+                        // Render the button with icon
+                        <button
+                          key={actionIndex}
+                          type="button"
+                          className={`rounded-full p-1 shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600 ${
+                            action.label === 'Delete'
+                              ? 'bg-red-600 text-white'
+                              : 'bg-gray-600 text-gray-300'
+                          }`}
+                          style={{
+                            marginRight:
+                              actionIndex !== actions.length - 1 ? '8px' : '0',
+                            display: 'inline-flex',
+                          }}
+                          onClick={() =>
+                            handleActionClick(item.id, action.onClick)
+                          }
+                        >
+                          <span className="sr-only">{action.label}</span>
+                          <span
                             style={{
-                              marginRight:
-                                actionIndex !== actions.length - 1
-                                  ? '8px'
-                                  : '0',
+                              width: '1.3em',
+                              height: '1.3em',
+                              color: 'white',
                             }}
                           >
-                            {action}
-                          </a>
-                        ) : (
-                          <div
-                            style={{
-                              display: 'inline-block',
-                              marginRight:
-                                actionIndex !== actions.length - 1
-                                  ? '8px'
-                                  : '0',
-                            }}
-                          >
-                            {action}
-                          </div>
-                        )}
-                      </React.Fragment>
-                    ))}
+                            {action.icon}
+                          </span>
+                        </button>
+                      ) : (
+                        // Render the button label if no icon is provided
+                        <button
+                          key={actionIndex}
+                          type="button"
+                          style={{
+                            marginRight:
+                              actionIndex !== actions.length - 1 ? '8px' : '0',
+                            display: 'inline-flex',
+                          }}
+                          onClick={() =>
+                            handleActionClick(item.id, action.onClick)
+                          }
+                        >
+                          <span>{action.label}</span>
+                        </button>
+                      )
+                    )}
                   </td>
                 )}
               </tr>

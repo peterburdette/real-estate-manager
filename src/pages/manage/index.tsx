@@ -2,10 +2,18 @@ import React, { useEffect, useState } from 'react';
 import PropertyCardGrid from '@/components/PropertyCardGrid/PropertyCardGrid';
 // import ListView from '@/components/ListView/ListView'; // Import your ListView component
 import { getProperties } from '@/server/properties/getPropertiesApi';
-import { Bars4Icon, PlusIcon, Squares2X2Icon } from '@heroicons/react/24/solid';
+import {
+  Bars4Icon,
+  EyeIcon,
+  PlusIcon,
+  Squares2X2Icon,
+  TrashIcon,
+} from '@heroicons/react/24/solid';
 import { getViewPropertiesToggleState } from '@/server/appState/getViewPropertiesToggleStateApi';
 import { updateViewPropertiesToggleState } from '@/server/appState/putViewPropertiesToggleStateApi';
 import { useRouter } from 'next/router';
+import DataTable from '@/components/DataTable/DataTable';
+import useCurrencyFormatter from '@/hooks/useCurrencyFormatter';
 
 interface ViewModeState {
   _id: string;
@@ -23,6 +31,7 @@ const ManagePage = ({ data, viewModeState }: ManageProps) => {
     viewModeState[0].viewMode
   );
   const router = useRouter();
+  console.log('data: ', data);
 
   useEffect(() => {
     const updateDatabase = async () => {
@@ -35,6 +44,60 @@ const ManagePage = ({ data, viewModeState }: ManageProps) => {
 
     updateDatabase();
   }, [viewMode, viewModeState, updateViewPropertiesToggleState]);
+
+  // Remove specific keys and combine address details
+  const modifiedTableData = data.map((property: any) => {
+    const {
+      _id,
+      id,
+      image,
+      amenities,
+      address,
+      city,
+      state,
+      zip,
+      propertyValue,
+      monthlyRentalIncome,
+      notes,
+      ...rest
+    } = property;
+    const combinedAddress = `${address}, ${city}, ${state} ${zip}`;
+
+    // Format propertyValue and monthlyRentalIncome to USD
+    const formattedPropertyValue = useCurrencyFormatter(propertyValue);
+    const formattedMonthlyRentalIncome =
+      useCurrencyFormatter(monthlyRentalIncome);
+
+    return {
+      id,
+      address: combinedAddress,
+      propertyValue: formattedPropertyValue,
+      monthlyRentalIncome: formattedMonthlyRentalIncome,
+      ...rest,
+    };
+  });
+
+  const handleViewProperty = (id: string) => {
+    router.push(`/manage/${id}`);
+  };
+
+  const handleDeleteProperty = (id: string) => {
+    // Implement your logic for deleting a property here
+    console.log('Delete property clicked with ID:', id);
+  };
+
+  const actions = [
+    {
+      label: 'View',
+      icon: <EyeIcon />,
+      onClick: (id: string) => handleViewProperty(id),
+    },
+    {
+      label: 'Delete',
+      icon: <TrashIcon />,
+      onClick: (id: string) => handleDeleteProperty(id),
+    },
+  ];
 
   const handleViewModeClick = (newMode: 'list' | 'grid') => {
     setViewMode(newMode);
@@ -85,11 +148,14 @@ const ManagePage = ({ data, viewModeState }: ManageProps) => {
               className="-ml-0.5 h-5 w-5"
               aria-hidden="true"
             />
-            New Property
+            Add Property
           </button>
         </div>
         {viewMode === 'list' ? (
-          'list view'
+          <DataTable
+            data={modifiedTableData}
+            actions={actions}
+          />
         ) : (
           <PropertyCardGrid properties={data} />
         )}

@@ -4,30 +4,35 @@ import DataTable from '@/components/DataTable/DataTable';
 const DownloadsPage = () => {
   const documents = [
     {
+      id: 1,
       document: 'Lease Agreement',
       category: 'Legal Documents',
       fileType: 'PDF',
       size: '1.5 MB',
     },
     {
+      id: 2,
       document: 'Tenant Application Form',
       category: 'Applications',
       fileType: 'Word',
       size: '0.8 MB',
     },
     {
+      id: 3,
       document: 'Property Inspection Report',
       category: 'Inspections',
       fileType: 'PDF',
       size: '2.2 MB',
     },
     {
+      id: 4,
       document: 'Maintenance Request Form',
       category: 'Maintenance',
       fileType: 'PDF',
       size: '0.6 MB',
     },
     {
+      id: 5,
       document: 'Tenant Welcome Guide',
       category: 'Guides',
       fileType: 'PDF',
@@ -35,9 +40,10 @@ const DownloadsPage = () => {
     },
   ];
   const actions = [
-    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-      Download
-    </button>,
+    {
+      label: 'Download',
+      onClick: (id: string) => console.log('Downloading file: ', id),
+    },
   ];
 
   return (
