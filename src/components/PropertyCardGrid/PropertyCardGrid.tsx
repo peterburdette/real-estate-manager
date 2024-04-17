@@ -49,7 +49,7 @@ const PropertyCardGrid = (props: any) => {
     <>
       <div
         role="list"
-        className="grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 max-w-8xl"
+        className="grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 max-w-8xl"
       >
         {properties.map((property: any) => (
           <PropertyCard
