@@ -97,13 +97,13 @@ const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
       <div className="mx-auto border-b border-gray-900/10 pb-12">
         <div className="mb-6 flex justify-between items-center px-4 sm:px-0">
           <Breadcrumbs />
-          {/* <div className="ml-4">
+          <div className="ml-4">
             <DropdownInputField
               name="Manage"
               options={['Edit', 'Delete']}
               onSelect={handleDropdownSelect}
             />
-          </div> */}
+          </div>
         </div>
 
         <div className="mb-6 flex justify-between items-center px-4 sm:px-0">
@@ -189,7 +189,7 @@ const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
                 </dt>
                 <dd className="mt-1 flex text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                   <span className="flex-grow">
-                    ${useCurrencyFormatter(property.propertyValue)}
+                    {useCurrencyFormatter(property.propertyValue)}
                   </span>
                 </dd>
               </div>
@@ -199,7 +199,7 @@ const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
                 </dt>
                 <dd className="mt-1 flex text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                   <span className="flex-grow">
-                    ${useCurrencyFormatter(property.monthlyRentalIncome)}
+                    {useCurrencyFormatter(property.monthlyRentalIncome)}
                   </span>
                 </dd>
               </div>
