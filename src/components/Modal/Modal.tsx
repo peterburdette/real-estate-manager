@@ -9,7 +9,7 @@ interface ModalProps {
   message: string;
   cancelText: string;
   confirmText: string;
-  onConfirm?: () => void;
+  onConfirm: () => void;
 }
 
 const Modal: React.FC<ModalProps> = ({
