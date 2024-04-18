@@ -156,7 +156,7 @@ const ManagePage = ({ data, viewModeState }: ManageProps) => {
   return (
     <div className="min-h-full">
       <div className="mx-auto pb-12">
-        <div className="mb-4 py-4 flex items-center justify-between border-b border-gray-200">
+        <div className="mb-4 py-4 flex items-center justify-between">
           <div className="items-center rounded-lg bg-gray-100 p-0.5 sm:flex">
             <button
               type="button"
