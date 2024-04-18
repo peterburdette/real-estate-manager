@@ -1,4 +1,4 @@
-import { FolderIcon } from '@heroicons/react/20/solid';
+import { HomeIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
@@ -24,7 +24,7 @@ const Breadcrumbs = () => {
       >
         <li>
           <div>
-            <FolderIcon
+            <HomeIcon
               className="h-5 w-5 flex-shrink-0"
               aria-hidden="true"
             />
