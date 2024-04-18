@@ -1,16 +1,26 @@
-import { Fragment, useRef } from 'react';
+import { Fragment } from 'react';
 import { Transition } from '@headlessui/react';
 import { Dialog } from '@headlessui/react';
 
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  message?: string;
+  title: string;
+  message: string;
+  cancelText: string;
+  confirmText: string;
+  onConfirm?: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen, message }) => {
-  const cancelButtonRef = useRef(null);
-
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  setIsOpen,
+  title,
+  message,
+  cancelText,
+  confirmText,
+  onConfirm,
+}) => {
   return (
     <Transition.Root
       show={isOpen}
@@ -19,7 +29,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen, message }) => {
       <Dialog
         as="div"
         className="fixed inset-0 overflow-y-auto"
-        initialFocus={cancelButtonRef}
         onClose={setIsOpen}
       >
         <Transition.Child
@@ -52,7 +61,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen, message }) => {
                       as="h3"
                       className="text-lg font-medium text-gray-900"
                     >
-                      Edit Property
+                      {title}
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">{message}</p>
@@ -63,18 +72,18 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen, message }) => {
               <div className="rounded-lg p-4 bg-gray-50 flex justify-end">
                 <button
                   type="button"
-                  className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                  className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
                   onClick={() => setIsOpen(false)}
-                  ref={cancelButtonRef}
                 >
-                  Cancel
+                  {cancelText}
                 </button>
+
                 <button
                   type="button"
-                  className="ml-3 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                  onClick={() => setIsOpen(false)}
+                  className="ml-3 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700"
+                  onClick={onConfirm}
                 >
-                  Save Changes
+                  {confirmText}
                 </button>
               </div>
             </div>
