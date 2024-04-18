@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import useCurrencyFormatter from '@/hooks/useCurrencyFormatter';
 import DropdownInputField from '@/components/Fields/DropdownInputField';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -14,6 +13,7 @@ import {
 } from '@heroicons/react/24/solid';
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import Tabs from '@/components/Tabs/Tabs';
+import PropertyDetailsSection from '../components/propertyDetailsSection';
 
 interface PropertyDetailProps {
   property: {
@@ -22,6 +22,7 @@ interface PropertyDetailProps {
     city: string;
     state: string;
     zip: number;
+    purchasePrice: number;
     propertyValue: number;
     monthlyRentalIncome: number;
     squareFeet: number;
@@ -47,6 +48,7 @@ const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [currentTab, setCurrentTab] = useState(0);
+  console.log('property: ', property);
 
   const handleTabClick = (index: number) => {
     setCurrentTab(index);
@@ -127,104 +129,43 @@ const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
           </div>
         </div>
 
-        {/* <div className="mt-6 relative h-60 overflow-hidden">
-          <img
-            src={property.image}
-            alt="Property Image"
-            className="w-full h-full object-cover"
-          />
-        </div> */}
-
-        {/* FUTURE TAB CONTENT HERE */}
-        {currentTab === 0 && (
-          <div className="px-8 shadow-sm ring-1 ring-gray-900/5 sm:mx-0 sm:rounded-lg">
-            <dl className="divide-y divide-gray-100">
-              <div className="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-medium leading-6 text-gray-900">
-                  Address
-                </dt>
-                <dd className="mt-1 flex text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  <span className="flex-grow">
-                    {property.address +
-                      ' ' +
-                      property.city +
-                      ', ' +
-                      property.state +
-                      ' ' +
-                      property.zip}
-                  </span>
-                </dd>
-              </div>
-              <div className="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-medium leading-6 text-gray-900">
-                  Availability
-                </dt>
-                <dd className="mt-1 flex text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  <span className="flex-grow">{property.availability}</span>
-                </dd>
-              </div>
-              <div className="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-medium leading-6 text-gray-900">
-                  Amenities
-                </dt>
-                <dd className="mt-1 flex text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  {property.amenities && property.amenities.length > 0 ? (
-                    property.amenities.map((amenity: string) => (
-                      <span
-                        className="flex-grow"
-                        key={amenity}
-                      >
-                        {amenity}
-                      </span>
-                    ))
-                  ) : (
-                    <span>No amenities available</span>
-                  )}
-                </dd>
-              </div>
-              <div className="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-medium leading-6 text-gray-900">
-                  Property Value
-                </dt>
-                <dd className="mt-1 flex text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  <span className="flex-grow">
-                    {useCurrencyFormatter(property.propertyValue)}
-                  </span>
-                </dd>
-              </div>
-              <div className="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-medium leading-6 text-gray-900">
-                  Monthly Rent Rate
-                </dt>
-                <dd className="mt-1 flex text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  <span className="flex-grow">
-                    {useCurrencyFormatter(property.monthlyRentalIncome)}
-                  </span>
-                </dd>
-              </div>
-              <div className="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-medium leading-6 text-gray-900">
-                  Notes
-                </dt>
-                <dd className="mt-1 flex text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  <span className="flex-grow">{property.notes}</span>
-                </dd>
-              </div>
-            </dl>
-          </div>
-        )}
+        {/* TAB CONTENT HERE */}
+        {currentTab === 0 && <PropertyDetailsSection property={property} />}
         {currentTab === 1 && (
-          <div className="mt-6 border-t border-gray-100">
-            {/* Photos content */}
-            {/* Include the content you want to display for Photos */}
-            Photos content...
-            <img src={`${property.image}`} />
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 place-items-center">
+            <img
+              className="hover:opacity-75"
+              src={`${property.image}`}
+            />
+            <img
+              className="hover:opacity-75"
+              src={`${property.image}`}
+            />
+            <img
+              className="hover:opacity-75"
+              src={`${property.image}`}
+            />
+            <img
+              className="hover:opacity-75"
+              src={`${property.image}`}
+            />
+            <img
+              className="hover:opacity-75"
+              src={`${property.image}`}
+            />
+            <img
+              className="hover:opacity-75"
+              src={`${property.image}`}
+            />
+            <img
+              className="hover:opacity-75"
+              src={`${property.image}`}
+            />
           </div>
         )}
         {currentTab === 2 && (
           <div className="mt-6 border-t border-gray-100">
             {/* Tenant(s) content */}
-            {/* Include the content you want to display for Tenant(s) */}
             Tenant(s) content
           </div>
         )}
