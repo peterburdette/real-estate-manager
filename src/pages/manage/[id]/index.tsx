@@ -43,7 +43,7 @@ const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
   property,
   error,
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [currentTab, setCurrentTab] = useState(0);
@@ -59,13 +59,11 @@ const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
 
   const handleDropdownSelect = (option: string) => {
     if (option === 'Delete') {
-      deletePropertyHandler(property.id);
-    } else {
-      setIsModalOpen(true);
+      setIsDeleteModalOpen(true);
     }
   };
 
-  const deletePropertyHandler = async (id: string) => {
+  const handleDeleteProperty = async (id: string) => {
     try {
       await deletePropertyById(id);
       router.push('/manage');
@@ -78,6 +76,7 @@ const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
           />
         ),
       } as CustomOptionsObject);
+      setIsDeleteModalOpen(false);
     } catch (error: any) {
       console.error('Error deleting property:', error.message);
       enqueueSnackbar('Error deleting property.', {
@@ -231,9 +230,13 @@ const PropertyDetailPage: NextPage<PropertyDetailProps> = ({
         )}
       </div>
       <Modal
-        isOpen={isModalOpen}
-        setIsOpen={setIsModalOpen}
-        message="test message"
+        isOpen={isDeleteModalOpen}
+        setIsOpen={setIsDeleteModalOpen}
+        title="Confirm Deletion"
+        message="Are you sure you want to delete this property?"
+        cancelText="Cancel"
+        confirmText="Delete Property"
+        onConfirm={() => handleDeleteProperty(property.id)}
       />
     </>
   );

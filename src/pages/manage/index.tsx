@@ -4,6 +4,8 @@ import PropertyCardGrid from '@/components/PropertyCardGrid/PropertyCardGrid';
 import { getProperties } from '@/server/properties/getPropertiesApi';
 import {
   Bars4Icon,
+  CheckCircleIcon,
+  ExclamationCircleIcon,
   EyeIcon,
   PlusIcon,
   Squares2X2Icon,
@@ -14,9 +16,11 @@ import { updateViewPropertiesToggleState } from '@/server/appState/putViewProper
 import { useRouter } from 'next/router';
 import DataTable from '@/components/DataTable/DataTable';
 import useCurrencyFormatter from '@/hooks/useCurrencyFormatter';
+import Modal from '@/components/Modal/Modal';
+import { OptionsObject, enqueueSnackbar } from 'notistack';
+import { deletePropertyById } from '@/server/properties/deletePropertyByIdApi';
 
 interface ViewModeState {
-  _id: string;
   id: string;
   viewMode: 'list' | 'grid';
 }
@@ -26,12 +30,19 @@ interface ManageProps {
   viewModeState: ViewModeState[];
 }
 
+type CustomOptionsObject = OptionsObject<'notification'> & {
+  icon?: React.ReactNode;
+};
+
 const ManagePage = ({ data, viewModeState }: ManageProps) => {
   const [viewMode, setViewMode] = useState<'list' | 'grid'>(
     viewModeState[0].viewMode
   );
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [propertyIdToDelete, setPropertyIdToDelete] = useState<string | null>(
+    null
+  );
   const router = useRouter();
-  console.log('data: ', data);
 
   useEffect(() => {
     const updateDatabase = async () => {
@@ -82,8 +93,52 @@ const ManagePage = ({ data, viewModeState }: ManageProps) => {
   };
 
   const handleDeleteProperty = (id: string) => {
-    // Implement your logic for deleting a property here
-    console.log('Delete property clicked with ID:', id);
+    // Open the delete confirmation modal and set the property ID
+    setIsDeleteModalOpen(true);
+    setPropertyIdToDelete(id);
+  };
+
+  const handleDeleteConfirmation = async () => {
+    try {
+      if (propertyIdToDelete) {
+        await deletePropertyById(propertyIdToDelete);
+        router.push('/manage');
+        enqueueSnackbar('Property deleted.', {
+          variant: 'notification',
+          icon: (
+            <CheckCircleIcon
+              className="h-6 w-6 text-green-400"
+              aria-hidden="true"
+            />
+          ),
+        } as CustomOptionsObject);
+        setIsDeleteModalOpen(false);
+      }
+    } catch (error: any) {
+      console.error('Error deleting property:', error.message);
+      enqueueSnackbar('Error deleting property.', {
+        variant: 'notification',
+        icon: (
+          <ExclamationCircleIcon
+            className="h-6 w-6 text-red-400"
+            aria-hidden="true"
+          />
+        ),
+      } as CustomOptionsObject);
+    }
+
+    // Close the modal after deleting
+    setIsDeleteModalOpen(false);
+    // Reset the propertyIdToDelete state
+    setPropertyIdToDelete(null);
+  };
+
+  const handleViewModeClick = (newMode: 'list' | 'grid') => {
+    setViewMode(newMode);
+  };
+
+  const handleAddNewProperty = () => {
+    router.push('/add-property');
   };
 
   const actions = [
@@ -99,17 +154,10 @@ const ManagePage = ({ data, viewModeState }: ManageProps) => {
     },
   ];
 
-  const handleViewModeClick = (newMode: 'list' | 'grid') => {
-    setViewMode(newMode);
-  };
-
-  const handleAddNewProperty = () => {
-    router.push('/add-property');
-  };
-
   return (
     <div className="min-h-full">
       <div className="mx-auto pb-12">
+        <div className="mb-4 py-4 flex items-center justify-between border-b border-gray-200"></div>
         <div className="mb-4 py-4 flex items-center justify-between border-b border-gray-200">
           <div className="items-center rounded-lg bg-gray-100 p-0.5 sm:flex">
             <button
@@ -160,6 +208,15 @@ const ManagePage = ({ data, viewModeState }: ManageProps) => {
           <PropertyCardGrid properties={data} />
         )}
       </div>
+      <Modal
+        isOpen={isDeleteModalOpen}
+        setIsOpen={setIsDeleteModalOpen}
+        title="Confirm Deletion"
+        message="Are you sure you want to delete this property?"
+        cancelText="Cancel"
+        confirmText="Delete Property"
+        onConfirm={handleDeleteConfirmation}
+      />
     </div>
   );
 };
