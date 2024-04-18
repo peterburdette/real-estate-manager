@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PropertyCardGrid from '@/components/PropertyCardGrid/PropertyCardGrid';
-// import ListView from '@/components/ListView/ListView'; // Import your ListView component
 import { getProperties } from '@/server/properties/getPropertiesApi';
 import {
   Bars4Icon,
