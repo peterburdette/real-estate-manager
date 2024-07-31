@@ -48,7 +48,7 @@ function Header() {
             Sign up
           </Link>
           <Link
-            href="/"
+            href="/login"
             className={`block rounded-lg px-3 py-2.5 text-sm font-semibold leading-7 text-gray-900 relative ${
               currentPath !== '/' ? 'text-white' : 'text-gray-900'
             }`}
