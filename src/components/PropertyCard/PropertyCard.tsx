@@ -17,14 +17,10 @@ const PropertyCard = ({ property, onDelete }: any) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="shrink-0">
-        <img
-          className="h-48 w-full object-cover"
-          src={`${property.image}`}
-          alt={`${property.address}`}
-        />
-      </div>
-      <div className="p-8">
-        <div className="mb-3 tracking-wide">
+        <div
+          className="mb-3 tracking-wide"
+          style={{ margin: '10px', position: 'absolute' }}
+        >
           <span
             className={`inline-flex items-center rounded-full px-2 py-1 ring-1 ring-inset ring-green-600/20 ${
               property.availability === 'Available'
@@ -35,6 +31,13 @@ const PropertyCard = ({ property, onDelete }: any) => {
             {property.availability}
           </span>
         </div>
+        <img
+          className="h-48 w-full object-cover"
+          src={`${property.image}`}
+          alt={`${property.address}`}
+        />
+      </div>
+      <div className="p-8">
         <div className="block mt-1 text-md leading-tight font-medium text-black">
           {property.address} {property.city}, {property.state} {property.zip}
         </div>
